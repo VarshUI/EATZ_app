@@ -18,6 +18,17 @@ A React app showcasing **restaurants and their menu items** from the Koramangala
 - ⚛️ React  
 - 💻 JavaScript / TypeScript  
 - 🎨 Tailwind CSS  
+- ⚡ Vite (for fast development builds)
+
+---
+
+## 🧪 Upcoming Features (in development)
+
+- 🛒 **Checkout flow** (add to cart, place order)
+- 👤 **User profiles and login system**
+- 🥦 **Groceries section** for daily essentials
+
+Stay tuned! 🚧 These features are actively being worked on.
 
 ---
 
