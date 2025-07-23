@@ -1,15 +1,15 @@
 # 🍽️ EATZ_app
 
-A React-based web application for **[describe your app purpose, e.g., delicious food ordering and recipe sharing]**.  
+A React app showcasing **restaurants and their menu items** from the Koramangala area in Bangalore. Perfect for exploring local food options and deciding where to eat!
 
 ---
 
 ## ✨ Features
 
-- 📖 Browse a variety of tasty recipes  
-- 🔐 User authentication and profiles  
-- 🎨 Responsive design with Tailwind CSS  
-- 🚚 Real-time order tracking  
+- 📍 Browse restaurants in Koramangala, Bangalore  
+- 🍕 View detailed menu items for each restaurant  
+- 🔎 Search and filter by cuisine or restaurant type  
+- 🎨 Responsive design using Tailwind CSS for a smooth experience on all devices  
 
 ---
 
@@ -18,7 +18,6 @@ A React-based web application for **[describe your app purpose, e.g., delicious 
 - ⚛️ React  
 - 💻 JavaScript / TypeScript  
 - 🎨 Tailwind CSS  
-- 📦 Other libraries/tools you use  
 
 ---
 
