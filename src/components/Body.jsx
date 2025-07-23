@@ -1,165 +1,148 @@
-import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
+import { RESTAURANT_API } from "../utils/constants";
+import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
-  useEffect(() => {});
-  const [originalList, setOriginalList] = useState([
-    {
-      id: 0,
-      resName: "Meghana Foods",
-      cuisine: "Biryani, North Indian,",
-      rating: 4.5,
-      deliveryTime: "45 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/iivuhjc2mswi9lublktf",
-    },
-    {
-      id: 1,
-      resName: "Taco Bell",
-      cuisine: "Mexican, Fast Food,",
-      rating: 4.0,
-      deliveryTime: "35 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2025/4/7/08c2c720-6c94-49b5-b0a0-3d6cb4234e2c_80118.JPG",
-    },
-    {
-      id: 2,
-      resName: "Pizza Hut",
-      cuisine: "Italian, Fast Food,",
-      rating: 4.2,
-      deliveryTime: "30 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2025/5/22/7a16c16a-e3dd-43c4-a094-5d41392de24d_10575.JPG",
-    },
-    {
-      id: 3,
-      resName: "Sushi World",
-      cuisine: "Japanese, Sushi,",
-      rating: 4.8,
-      deliveryTime: "50 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/bti87zuyybyskpzht5uo",
-    },
-    {
-      id: 4,
-      resName: "Curry House",
-      cuisine: "Indian, Curry,",
-      rating: 4.3,
-      deliveryTime: "40 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2025/3/2/fb008b88-c4e4-4f64-9712-3282a54218e2_69354.jpg",
-    },
-    {
-      id: 5,
-      resName: "Burger King",
-      cuisine: "Fast Food, Burgers,",
-      rating: 4.1,
-      deliveryTime: "25 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2025/3/24/aa2250f4-9b3d-4df1-a58d-276d36cc813e_5938.jpg",
-    },
-    {
-      id: 6,
-      resName: "Bheema's Kitchen",
-      cuisine: "South Indian, Biryani,",
-      rating: 4.4,
-      deliveryTime: "60 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/aff0be3ebc62e299701c087b8dcd1c0d",
-    },
-    {
-      id: 7,
-      resName: "Chalukya Samrat",
-      cuisine: "Cafe, FastFood, Indian",
-      rating: 4.4,
-      deliveryTime: "30 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/7a5d73bfc2f0b293750e0497fddacc63",
-    },
-    {
-      id: 8,
-      resName: "Lakeview Milkbar",
-      cuisine: "Desserts, Sweets,",
-      rating: 4.7,
-      deliveryTime: "20 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/juzrypje6zlbu2jgebwm",
-    },
-    {
-      id: 9,
-      resName: "Grill House",
-      cuisine: "Barbecue, Grill,",
-      rating: 4.9,
-      deliveryTime: "45 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/qltgnkyywuo5gmnpqzbm",
-    },
-    {
-      id: 10,
-      resName: "Beijing Bites",
-      cuisine: "Chinese, Asian,",
-      rating: 4.6,
-      deliveryTime: "30 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/6/25/30fa9e0b-bfe8-439f-b648-78987ceade91_8766.jpg",
-    },
-    {
-      id: 11,
-      resName: "Glen's Bakehouse",
-      cuisine: "Bakery, Desserts,",
-      rating: 4.5,
-      deliveryTime: "25 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/m6jahioyu7zrodei5pcq",
-    },
-    {
-      id: 12,
-      resName: "Mangnolia",
-      cuisine: "Bakery, Desserts,",
-      rating: 4.5,
-      deliveryTime: "25 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/12/20/51195588-58c4-4018-8a65-1e0a654a5db9_1011691.jpg",
-    },
-    {
-      id: 13,
-      resName: "Cafe noir",
-      cuisine: "Pasta, Pizza, Burgers",
-      rating: 4.3,
-      deliveryTime: "30 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/b0a6a7d0f0fb89396e215fa4c2aaf213",
-    },
-    {
-      id: 14,
-      resName: "Swiss ice cream",
-      cuisine: "Ice Cream, Desserts",
-      rating: 4.8,
-      deliveryTime: "20 min",
-      imageUrl:
-        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/5db28ee7aed5c06a08111207a24c6a2c",
-    },
-  ]);
-  const filterTopRated = originalList.filter((res) => res.rating >= 4.5);
-  const [resList, setResList] = useState(originalList);
-  const [showTopRated, setShowTopRated] = useState(false);
-  const handleToggle = () => {
-    showTopRated ? setResList(originalList) : setResList(filterTopRated);
-    setShowTopRated(!showTopRated); // toggle state
-  };
-  return (
-    <div className="body">
-      <div className="filter">
-        <button className="filter-btn" onClick={handleToggle}>
-          {showTopRated ? "Show All Restaurants" : "Top Rated Restaurants"}
-        </button>
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [searchError, setSearchError] = useState(null);
+  const [isTopRatedFilterOn, setIsTopRatedFilterOn] = useState(false);
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const response = await fetch(RESTAURANT_API);
+        const json = await response.json();
+        let restaurants =
+          json?.data?.cards?.find((item) =>
+            item?.card?.card?.id?.includes("restaurant_grid")
+          )?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+
+        // Simulate promoted restaurants (for testing/demo)
+        restaurants = restaurants.map((res, index) => ({
+          ...res,
+          info: {
+            ...res.info,
+            promoted: index % 3 === 0, // every 3rd restaurant is "promoted"
+          },
+        }));
+
+        setAllRestaurants(restaurants);
+        setFilteredRestaurants(restaurants);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
+    fetchRestaurants();
+  }, []);
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <h1 className="text-2xl font-semibold text-red-600 text-center px-4">
+          Sorry! looks like you're offline. Please check your internet connection
+        </h1>
       </div>
-      <div className="res-container">
-        {resList.map((res) => {
-          return <RestaurantCard key={res.id} resData={res} />;
-        })}
+    );
+  }
+
+  if (allRestaurants?.length === 0) {
+    return <Shimmer />;
+  }
+
+  const toggleTopRatedFilter = () => {
+    if (!isTopRatedFilterOn) {
+      const filtered = allRestaurants.filter(
+        (res) => res?.info?.avgRating > 4.3
+      );
+      setFilteredRestaurants(filtered);
+      setIsTopRatedFilterOn(true);
+      setSearchError(null);
+    } else {
+      setFilteredRestaurants(allRestaurants);
+      setIsTopRatedFilterOn(false);
+      setSearchError(null);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 px-4 py-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Filter and Search Section */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-8 items-center justify-between">
+          <div className="filter">
+            <button
+              onClick={toggleTopRatedFilter}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                isTopRatedFilterOn
+                  ? "bg-orange-500 text-white hover:bg-orange-600"
+                  : "bg-white text-gray-700 border-2 border-gray-300 hover:border-orange-500 hover:text-orange-500"
+              } shadow-md hover:shadow-lg`}
+            >
+              {isTopRatedFilterOn ? "Show All Restaurants" : "Top Rated Restaurants"}
+            </button>
+          </div>
+
+          {/* Search restaurants */}
+          <div className="flex gap-2 w-full sm:w-auto">
+            <input
+              type="text"
+              placeholder="Search restaurants..."
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+              className="flex-1 sm:w-80 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-300"
+            />
+            <button
+              onClick={() => {
+                const filtered = allRestaurants.filter((res) =>
+                  res?.info?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
+                );
+                setFilteredRestaurants(filtered);
+                if (filtered.length > 0) {
+                  setSearchError(null);
+                } else {
+                  setSearchError(
+                    `Sorry, we couldn't find any results for "${searchText}"`
+                  );
+                }
+                setIsTopRatedFilterOn(false);
+              }}
+              className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+
+        {/* Error Message */}
+        {searchError && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-600 font-medium text-center">{searchError}</p>
+          </div>
+        )}
+
+        {/* Restaurant Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredRestaurants?.map((restaurant) => {
+  const Promoted = withPromotedLabel(RestaurantCard);
+  return restaurant.info.promoted ? (
+    <Promoted key={restaurant.info.id} item={restaurant.info} />
+  ) : (
+    <RestaurantCard key={restaurant.info.id} item={restaurant.info} />
+  );
+})}
+
+        </div>
       </div>
     </div>
   );
 };
+
 export default Body;
